@@ -9,7 +9,6 @@ using PagebaTask.Services.Students;
 
 namespace PagebaTask.Controllers
 {
-
     [ApiController]
     [Route("[controller]")]
     public class StudentController : ControllerBase

@@ -101,6 +101,32 @@ public StudentDto GetStudentById(int id)
     };
 }
 
+// Stored procedure GetStudentById (  :((((  )
+/*
+public StudentDto GetStudentById(int id)
+{
+    var student = _context.Students
+        .FromSqlRaw("EXECUTE GetStudentWithCoursesAndStatus @Id", new SqlParameter("@Id", id))
+        .Select(s => new StudentDto
+        {
+            Id = s.Id,
+            Name = s.Name,
+            Surname = s.Surname,
+            IndexNo = s.IndexNo,
+            Year = s.Year,
+            StatusId = s.StatusId,
+            Courses = s.StudentCourses != null ? s.StudentCourses.Select(sc => new CourseDto
+            {
+                Id = sc.Course.Id,
+                Name = sc.Course.Name
+            }).ToList() : null
+        })
+        .FirstOrDefault();
+
+    return student;
+}
+*/
+
         public StudentDto UpdateStudent(int id, StudentDto student)
 {
     var existingStudent = _context.Students.Find(id);
