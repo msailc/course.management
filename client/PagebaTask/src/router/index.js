@@ -30,13 +30,26 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  console.log('beforeEach called with', to, from)
   const isAuthenticated = localStorage.getItem('token')
+  let username = localStorage.getItem('username')
 
   if (to.matched.some(record => record.meta.requiresAuth) && !isAuthenticated) {
     next('/login')
   } else {
+    if (!username) {
+      // Here you should initialize the username
+      username = 'default'
+      localStorage.setItem('username', username)
+    }
     next()
   }
+  localStorage.setItem('username', username)
 })
+
+
+
+
+
 
 export default router

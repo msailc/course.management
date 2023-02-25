@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using PagebaTask.DTOs;
 using PagebaTask.Entities;
@@ -24,7 +25,8 @@ namespace PagebaTask.Services.Students
         Name = student.Name,
         Surname = student.Surname,
         Year = student.Year,
-        StatusId = student.StatusId
+        StatusId = student.StatusId,
+        IndexNo = student.IndexNo
     };
     _context.Students.Add(newStudent);
     _context.SaveChanges();
@@ -102,30 +104,40 @@ public StudentDto GetStudentById(int id)
 }
 
 // Stored procedure GetStudentById (  :((((  )
-/*
-public StudentDto GetStudentById(int id)
+
+public StudentDto GetStudentByIdProcedure(int id)
 {
     var student = _context.Students
-        .FromSqlRaw("EXECUTE GetStudentWithCoursesAndStatus @Id", new SqlParameter("@Id", id))
-        .Select(s => new StudentDto
-        {
-            Id = s.Id,
-            Name = s.Name,
-            Surname = s.Surname,
-            IndexNo = s.IndexNo,
-            Year = s.Year,
-            StatusId = s.StatusId,
-            Courses = s.StudentCourses != null ? s.StudentCourses.Select(sc => new CourseDto
-            {
-                Id = sc.Course.Id,
-                Name = sc.Course.Name
-            }).ToList() : null
-        })
-        .FirstOrDefault();
+    .FromSqlRaw("EXECUTE GetStudentWithCoursesAndStatus @Id", new SqlParameter("@Id", id))
+    .AsEnumerable()
+    .Select(s => new StudentDto
+    {
+        Id = s.Id,
+        Name = s.Name,
+        Surname = s.Surname,
+        IndexNo = s.IndexNo,
+        Year = s.Year,
+        StatusId = s.StatusId,
+        Courses = s.StudentCourses != null 
+            ? s.StudentCourses
+                .Select(sc => new CourseDto
+                {
+                    Id = sc.CourseId,
+                    Name = sc.Course.Name,
+                    Students = null
+                })
+                .ToList()
+            : null
+    })
+    .FirstOrDefault();
 
     return student;
 }
-*/
+
+
+
+
+
 
         public StudentDto UpdateStudent(int id, StudentDto student)
 {

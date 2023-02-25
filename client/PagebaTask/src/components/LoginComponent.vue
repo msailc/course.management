@@ -54,6 +54,7 @@ export default {
 
     if (data.token) {
       localStorage.setItem('token', data.token)
+      localStorage.setItem('username', this.username)
       this.$router.push('/home')
     } else {
       this.error = data.message
@@ -62,6 +63,7 @@ export default {
     this.error = err.message
   }
 }
+
   }
 }
 </script>

@@ -40,6 +40,19 @@ namespace PagebaTask.Controllers
         return Ok(student);
     }
 
+    [HttpGet("proc/{id}")]
+    public IActionResult GetStudentByIdProcedure(int id)
+    {
+        var student = _studentService.GetStudentByIdProcedure(id);
+
+        if (student == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(student);
+    }
+
     [HttpPost]
     public IActionResult CreateStudent(StudentDto studentDto)
     {
