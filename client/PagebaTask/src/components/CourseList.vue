@@ -23,6 +23,7 @@
     </table>
     <CourseDetails v-if="selectedCourseId" :key="selectedCourseId" :courseId="selectedCourseId" @close-details="closeDetails" />
     <CourseCreate v-if="createCourseModal" @create-course="closeCreateCourseModal" />
+    
   </div>
 </template>
 

@@ -19,8 +19,10 @@
         <input required style="width: 100%;" type="text" id="indexNo" v-model="formData.indexNo" />
       </div>
       <div>
-        <label for="statusid">Status id</label>
-        <input required style="width: 100%;" type="text" id="statusid" v-model="formData.statusId" />
+        <label for="statusId">Status ID:</label>
+        <select required style="width: 100%;" id="statusId" v-model="formData.statusId">
+          <option v-for="status in statusList" :value="status.id">{{ status.status }}</option>
+        </select>
       </div>
       <div style="margin-top: 1em;">
         <button @click.prevent="save">Save</button>
@@ -33,6 +35,7 @@
 
 <script>
 import axios from 'axios';
+
 
 export default {
   props: {
@@ -57,66 +60,60 @@ export default {
         year: '',
         indexNo: '',
         statusId: ''
-      }
+      },
+      statusList: []
     };
   },
+  created() {
+    axios.get('http://localhost:5250/studentstatus')
+      .then(response => {
+        this.statusList = response.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  },
   methods: {
-    save() {
-  const url = this.mode === 'create' ? 'http://localhost:5250/student' : `http://localhost:5250/student/${this.student.id}`;
-  const method = this.mode === 'create' ? 'post' : 'put';
-  const jsonData = JSON.stringify(this.formData); // Convert form data to JSON object
-  axios({
-    method: method,
-    url: url,
-    headers: {
-      'Content-Type': 'application/json' // Set request header to indicate JSON format
-    },
-    data: jsonData // Send JSON object as request body
-  })
-    .then(response => {
-      this.$emit('save-student');
+  save() {
+    const url = this.mode === 'create' ? 'http://localhost:5250/student' : `http://localhost:5250/student/${this.student.id}`;
+    const method = this.mode === 'create' ? 'post' : 'put';
+    const jsonData = JSON.stringify(this.formData); // Convert form data to JSON object
+    axios({
+      method: method,
+      url: url,
+      headers: {
+        'Content-Type': 'application/json' // Set request header to indicate JSON format
+      },
+      data: jsonData
     })
-    .catch(error => {
-      console.log(error);
-    });
-},
-    cancel() {
-      this.$emit('cancel');
-    }
+      .then(response => {
+        this.$emit('saved', response.data);
+        this.formData = {}; // Clear the form data after saving
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  },
+  cancel() {
+    this.formData = {};
+    this.$emit('cancel');
+  }
   },
   watch: {
-    selectedStudent: {
-      handler() {
-        if (this.selectedStudent) {
-          this.formData = Object.assign({}, this.selectedStudent);
-        } else {
-          this.formData = {
-            name: '',
-            surname: '',
-            year: '',
-            indexNo: '',
-            statusId: ''
-          };
-        }
-      },
-      immediate: true
+  student: {
+    handler(newVal, oldVal) {
+      this.formData = { ...newVal };
     },
-    student: {
-      handler() {
-        if (this.student) {
-          this.formData = Object.assign({}, this.student);
-        } else {
-          this.formData = {
-            name: '',
-            surname: '',
-            year: '',
-            indexNo: '',
-            statusId: ''
-          };
-        }
-      },
-      immediate: true
+    immediate: true,
+    deep: true
+  },
+  mode(newVal, oldVal) {
+    if (newVal === 'create') {
+      this.formData = {};
     }
   }
+}
 };
 </script>
+

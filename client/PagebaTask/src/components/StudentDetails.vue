@@ -7,6 +7,7 @@
       <p>Student Surname: {{ student.surname }}</p>
       <p>Student Year: {{ student.year }}</p>
       <p>Student Index Number: {{ student.indexNo }}</p>
+      <p>Student Status: {{ statusName }}</p>
       <div>
         <h3>Courses</h3>
         <ul>
@@ -19,7 +20,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import axios from 'axios';
 
@@ -33,7 +33,8 @@ export default {
   data() {
     return {
       student: null,
-      courses: []
+      courses: [],
+      statuses: []
     };
   },
   methods: {
@@ -42,6 +43,7 @@ export default {
         .then(response => {
           this.student = response.data;
           this.fetchCourses();
+          this.fetchStatuses();
         })
         .catch(error => {
           console.log(error);
@@ -55,6 +57,21 @@ export default {
         .catch(error => {
           console.log(error);
         });
+    },
+    fetchStatuses() {
+      axios.get('http://localhost:5250/studentstatus')
+        .then(response => {
+          this.statuses = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  },
+  computed: {
+    statusName() {
+      const status = this.statuses.find(s => s.id === this.student.statusId);
+      return status ? status.status : '';
     }
   },
   mounted() {
