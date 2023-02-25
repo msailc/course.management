@@ -1,26 +1,28 @@
 <template>
-    <div>
-      <h2>Create Course</h2>
-      <form @submit.prevent="createCourse">
-        <label for="course-name">Course Name:</label>
-        <input type="text" id="course-name" v-model="courseName" required>
-        <div>
-          <label for="students">Select Students:</label>
-          <select id="students" v-model="selectedStudent">
-            <option v-for="student in students" :key="student.id" :value="student">{{ student.name }}</option>
-          </select>
-          <button type="button" @click="addStudent">Add Student</button>
+  <div>
+    <h2>Create Course</h2>
+    <form @submit.prevent="createCourse">
+      <label for="course-name" style="text-align: left; display: block;">Course Name:</label>
+      <input type="text" id="course-name" v-model="courseName" required style="width: 100%;">
+      <div>
+        <label for="students" style="text-align: left; display: block;">Select Students:</label>
+        <select id="students" v-model="selectedStudent" style="width: 100%;">
+          <option v-for="student in students" :key="student.id" :value="student">{{ student.name }}</option>
+        </select>
+        <button type="button" @click="addStudent">Add Student</button>
+      </div>
+      <div>
+        <label for="selected-students">Selected Students:</label>
+        <div id="selected-students">
+          <span v-for="student in selectedStudents" :key="student.id">{{ student.name }} <button type="button" @click="removeStudent(student)">x</button></span>
         </div>
-        <div>
-          <label for="selected-students">Selected Students:</label>
-          <div id="selected-students">
-            <span v-for="student in selectedStudents" :key="student.id">{{ student.name }} <button type="button" @click="removeStudent(student)">x</button></span>
-          </div>
-        </div>
-        <button type="submit">Create</button>
-      </form>
-    </div>
-  </template>
+      </div>
+      <button>Create</button>
+    </form>
+  </div>
+</template>
+
+
   
   <script>
   import axios from 'axios';
@@ -79,3 +81,12 @@
     }
   };
   </script>
+
+  <style>
+label {
+  text-align: left;
+  display: block;
+  margin-bottom: 5px;
+}
+
+</style>

@@ -4,29 +4,32 @@
     <form>
       <div>
         <label for="name">Name:</label>
-        <input type="text" id="name" v-model="formData.name" />
+        <input required style="width: 100%;" type="text" id="name" v-model="formData.name" />
       </div>
       <div>
         <label for="surname">Surname:</label>
-        <input type="text" id="surname" v-model="formData.surname" />
+        <input required style="width: 100%;" type="text" id="surname" v-model="formData.surname" />
       </div>
       <div>
         <label for="year">Year:</label>
-        <input type="text" id="year" v-model="formData.year" />
+        <input required style="width: 100%;" type="text" id="year" v-model="formData.year" />
       </div>
       <div>
         <label for="indexNo">Index Number:</label>
-        <input type="text" id="indexNo" v-model="formData.indexNo" />
+        <input required style="width: 100%;" type="text" id="indexNo" v-model="formData.indexNo" />
       </div>
       <div>
         <label for="statusid">Status id</label>
-        <input type="text" id="statusid" v-model="formData.statusId" />
+        <input required style="width: 100%;" type="text" id="statusid" v-model="formData.statusId" />
       </div>
-      <button @click.prevent="save">Save</button>
-      <button @click.prevent="cancel">Cancel</button>
+      <div style="margin-top: 1em;">
+        <button @click.prevent="save">Save</button>
+        <button style="margin-left: 5px" @click.prevent="cancel">Cancel</button>
+      </div>
     </form>
   </div>
 </template>
+
 
 <script>
 import axios from 'axios';

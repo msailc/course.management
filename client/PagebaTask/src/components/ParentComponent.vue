@@ -33,7 +33,7 @@ export default {
   align-items: center;
   flex-direction: column;
   justify-content: flex-start;
-  height: 500px;
+  height: 700px;
   width: 500px;
   margin: 10px;
   border: 1px solid #ccc;

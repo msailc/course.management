@@ -1,30 +1,33 @@
 <template>
   <div>
-    <h2>Student List</h2>
+    <div style="display: flex; align-items: center;">
+  <h1 style="margin-right: 1em;">Student list</h1>
+  <button style="font-size: 1em; padding: 0.2em 0.5em; border-radius: 50%; background-color: black; color: white;" @click="createStudent">+</button>
+</div>
+
     <table>
       <thead>
         <tr>
           <th>Name</th>
           <th>Surname</th>
           <th>Actions</th>
-          <th>    <button @click="createStudent">Create Student</button></th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="student in students" :key="student.id">
-          <td>{{ student.name }}</td>
-          <td>{{ student.surname }}</td>
-          <td>
+          <td style="padding-left: 10px; padding-right: 10px">{{ student.name }}</td>
+          <td style="padding-left: 10px; padding-right: 10px">{{ student.surname }}</td>
+          <td style="padding-left: 10px; padding-right: 10px">
             <button @click="showDetails(student.id)">Details</button>
-            <button @click="showEdit(student)">Edit</button>
-            <button @click="showConfirmation(student.id)">Delete</button>
+            <button style="margin-left: 5px" @click="showEdit(student)">Edit</button>
+            <button style="margin-left: 5px" @click="showConfirmation(student.id)">Delete</button>
           </td>
         </tr>
       </tbody>
     </table>
     <StudentDetails v-if="selectedStudentId" :key="selectedStudentId" :studentId="selectedStudentId" @close-details="closeDetails" />
 
-<StudentCreateEdit v-if="showCreateModal || showEditModal" :mode="mode" :student="student" @save-student="saveStudent" @cancel="closeModals" />
+    <StudentCreateEdit v-if="showCreateModal || showEditModal" :mode="mode" :student="student" @save-student="saveStudent" @cancel="closeModals" />
 
   </div>
 </template>

@@ -1,22 +1,22 @@
 <template>
   <div>
-    <h2>Course List</h2>
+    <div style="display: flex; align-items: center;">
+      <h1 style="margin-right: 1em;">Course list</h1>
+      <button style="font-size: 1em; padding: 0.2em 0.5em; border-radius: 50%; background-color: black; color: white;" @click="createCourse">+</button>
+    </div>
     <table>
       <thead>
         <tr>
           <th>Course name</th>
           <th>Actions</th>
-          <th>
-            <button @click="createCourse">Create course</button>
-          </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="course in courses" :key="course.id">
-          <td>{{ course.name }}</td>
-          <td>
+          <td style="padding-left: 10px; padding-right: 10px">{{ course.name }}</td>
+          <td style="padding-left: 10px; padding-right: 10px">
             <button @click="showDetails(course.id)">Details</button>
-            <button @click="deleteCourse(course.id)">Delete</button>
+            <button style="margin-left: 5px" @click="deleteCourse(course.id)">Delete</button>
           </td>
         </tr>
       </tbody>
