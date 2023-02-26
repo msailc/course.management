@@ -133,12 +133,6 @@ public StudentDto GetStudentByIdProcedure(int id)
 
     return student;
 }
-
-
-
-
-
-
         public StudentDto UpdateStudent(int id, StudentDto student)
 {
     var existingStudent = _context.Students.Find(id);
@@ -147,6 +141,7 @@ public StudentDto GetStudentByIdProcedure(int id)
     existingStudent.Surname = student.Surname;
     existingStudent.Year = student.Year;
     existingStudent.StatusId = student.StatusId;
+    existingStudent.IndexNo = student.IndexNo;
     _context.SaveChanges();
 
     return new StudentDto
@@ -155,7 +150,8 @@ public StudentDto GetStudentByIdProcedure(int id)
         Name = existingStudent.Name,
         Surname = existingStudent.Surname,
         Year = existingStudent.Year,
-        StatusId = existingStudent.StatusId
+        StatusId = existingStudent.StatusId,
+        IndexNo = existingStudent.IndexNo
     };
 }
     }
