@@ -2,6 +2,7 @@
     <div class="navbar">
       <div class="navbar-left">Page.ba Task</div>
       <div class="navbar-right">Logged in as {{ currentUser }}</div>
+      <li v-if="$isAuthenticated"><button @click="logout">Logout</button></li>
     </div>
   </template>
   
@@ -9,10 +10,21 @@
   export default {
     name: 'Navbar',
     computed: {
-      currentUser() {
-        return localStorage.getItem('username')
-      }
+  currentUser() {
+    const username = localStorage.getItem('username')
+    console.log('username:', username)
+    return username
+  }
+},
+methods: {
+    logout() {
+      // Clear the token and username from local storage
+      localStorage.removeItem('token')
+      localStorage.removeItem('username')
+      // Redirect to the login page
+      this.$router.push('/login')
     }
+  }
   }
   </script>
   

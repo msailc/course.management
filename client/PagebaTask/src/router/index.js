@@ -35,17 +35,15 @@ router.beforeEach((to, from, next) => {
   let username = localStorage.getItem('username')
 
   if (to.matched.some(record => record.meta.requiresAuth) && !isAuthenticated) {
+    // If the user is not authenticated and the route requires authentication, redirect to the login page
     next('/login')
-  } else {
-    if (!username) {
-      // Here you should initialize the username
-      username = 'default'
-      localStorage.setItem('username', username)
-    }
-    next()
+  } else if (isAuthenticated) {
+    // If the user is authenticated, set the username in local storage
+    localStorage.setItem('username', username)
   }
-  localStorage.setItem('username', username)
+  next()
 })
+
 
 
 
