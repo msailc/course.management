@@ -1,11 +1,11 @@
 <template>
     <div>
-      <h2>Course Details</h2>
+      <h2 style="margin-top: 1rem; padding-bottom: 1rem; font-size: 20px; font-weight: 600;">Course Details</h2>
       <div v-if="course">
         <p>Course ID: {{ course.id }}</p>
         <p>Course Name: {{ course.name }}</p>
         <div>
-          <h3>Students</h3>
+          <h3 style="margin-top: 0.5rem; padding-bottom: 0.5rem; font-size: 20px; font-weight: 600;">Students</h3>
           <ul>
             <li v-for="student in students" :key="student.id">{{ student.name }}</li>
           </ul>

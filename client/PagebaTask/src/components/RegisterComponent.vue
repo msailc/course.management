@@ -1,16 +1,15 @@
 <template>
     <div class="register-container">
-      <h2>Register</h2>
-      <form @submit.prevent="registerUser">
-        <label>
+      <h2 style="margin-top: 0.5rem; padding-bottom: 0.5rem; font-size: 20px; font-weight: 600; color: #fff;">Register</h2>      <form @submit.prevent="registerUser">
+        <label style="color:#fff">
           Username:
           <input type="text" v-model="username" />
         </label>
-        <label>
+        <label style="color:#fff">
           Password:
           <input type="password" v-model="password" />
         </label>
-        <button type="submit">Register</button>
+        <button style="margin-top: 1rem;">Register</button>
       </form>
       <div v-if="errorMessage" class="error-message">
         {{ errorMessage }}

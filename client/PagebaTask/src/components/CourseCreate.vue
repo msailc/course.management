@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Create Course</h2>
+    <h2 style="margin-top: 1rem; font-size: 20px; font-weight: 600;">Create Course</h2>
     <form @submit.prevent="createCourse">
       <label for="course-name" style="text-align: left; display: block;">Course Name:</label>
       <input type="text" id="course-name" v-model="courseName" required style="width: 100%;">

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>{{ mode === 'create' ? 'Create' : 'Edit' }} student</h2>
+    <h2 style="margin-top: 1rem; font-size: 20px; font-weight: 600;">{{ mode === 'create' ? 'Create' : 'Edit' }} student</h2>
     <form>
       <div>
         <label for="name">Name:</label>

@@ -1,20 +1,20 @@
 <template>
     <div class="login-container">
-      <h2>Login</h2>
+      <h2 style="margin-top: 0.5rem; padding-bottom: 0.5rem; font-size: 20px; font-weight: 600; color: #fff;">Login</h2>
       <form @submit.prevent="login">
-        <label>
+        <label style="color:#fff">
           Username:
           <input type="text" v-model="username" required>
         </label>
         <br>
-        <label>
+        <label style="color:#fff">
           Password:
           <input type="password" v-model="password" required>
         </label>
         <br>
-        <button type="submit">Login</button>
+        <button style="margin-bottom: 1rem;">Login</button>
       </form>
-      <p>Don't have an account? <router-link to="/register">Register</router-link></p>
+      <p>Don't have an account? <router-link to="/register" style="color:#fff">Register!</router-link></p>
     </div>
   </template>
   
@@ -91,15 +91,6 @@ input[type='password'] {
   border: 1px solid #ccc;
 }
 
-button[type='submit'] {
-  margin-top: 10px;
-  padding: 5px;
-  border-radius: 3px;
-  border: none;
-  background-color: #4caf50;
-  color: white;
-  cursor: pointer;
-}
 
 .error-message {
   margin-top: 10px;

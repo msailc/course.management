@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div style="display: flex; align-items: center;">
+  <div class="listtitle" style="display: flex; align-items: center;">
   <h1 style="margin-right: 1em;">Student list</h1>
-  <button style="font-size: 1em; padding: 0.2em 0.5em; border-radius: 50%; background-color: black; color: white;" @click="createStudent">+</button>
+  <button style="background-color: #fff; color: hsl(208, 12%, 21%);" @click="createStudent">Create Student</button>
 </div>
 
     <table>

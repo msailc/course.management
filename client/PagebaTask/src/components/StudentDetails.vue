@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Student Details</h2>
+    <h2 style="margin-top: 1rem; padding-bottom: 1rem; font-size: 20px; font-weight: 600;">Student Details</h2>
     <div v-if="student">
       <p>Student ID: {{ student.id }}</p>
       <p>Student Name: {{ student.name }}</p>
@@ -9,7 +9,7 @@
       <p>Student Index Number: {{ student.indexNo }}</p>
       <p>Student Status: {{ statusName }}</p>
       <div>
-        <h3>Courses</h3>
+        <h3 style="margin-top: 0.5rem; padding-bottom: 0.5rem; font-size: 20px; font-weight: 600;">Courses</h3>
         <ul>
           <li v-for="course in courses" :key="course.id">{{ course.name }}</li>
         </ul>
